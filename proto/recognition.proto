@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "recognition/pb";
+option java_package = "com.scrfd.recognition";
+option java_outer_classname = "RecognitionPB";
+option objc_class_prefix = "RCG";
+option csharp_namespace = "Recognition.Proto";
+
+package recognition;
+
+service Recognition {
+  rpc Recognize (RecognizeRequest) returns (RecognizeResponse);
+}
+
+message RecognizeRequest {
+  bytes image = 1;
+}
+
+message RecognizeResponse {
+  repeated PredictionBox boxes = 1;
+}
+
+message PredictionBox {
+  float score = 1;
+  float box_left = 2;
+  float box_top = 3;
+  float box_right = 4;
+  float box_bottom = 5;
+  repeated float key_points = 6;
+}
